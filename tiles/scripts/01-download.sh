@@ -38,24 +38,41 @@ if [ -z "$JOB_ID" ]; then
 fi
 echo "    Job ID : $JOB_ID"
 
-# Le PBF est servi quasi-immédiatement à /files/{id}.osm.pbf
-# On attend juste qu'il soit dispo (réponse 200 sur HEAD).
+# Le PBF est servi à /files/{id}.osm.pbf une fois le job traité.
+# Slice ne renvoie pas de Content-Type sur HEAD, donc on se base sur le
+# Content-Length : un vrai PBF fait > 5000 octets, la SPA HTML d'erreur fait
+# quelques centaines.
 echo "[2/2] Téléchargement du PBF…"
 PBF_URL="https://slice.openstreetmap.us/files/${JOB_ID}.osm.pbf"
 
-for i in {1..30}; do
-  HTTP_CODE=$(curl -sS -o /dev/null -w "%{http_code}" -I "$PBF_URL")
-  if [ "$HTTP_CODE" = "200" ]; then
-    break
+PBF_READY=false
+for i in {1..60}; do
+  SIZE=$(curl -sS -o /dev/null -w "%{size_download}" --range "0-0" "$PBF_URL")
+  CONTENT_LENGTH=$(curl -sSI "$PBF_URL" 2>/dev/null | grep -i "content-length" | tail -1 | awk '{print $2}' | tr -d '\r')
+
+  if [ -n "$CONTENT_LENGTH" ] && [ "$CONTENT_LENGTH" -gt 5000 ]; then
+    # Vérification supplémentaire : le premier octet ressemble à du PBF binaire
+    # (les PBF OSM commencent par 0x00 0x00 0x00 0x?? - la taille du blob header)
+    FIRST_BYTE=$(curl -sS --range "0-3" "$PBF_URL" 2>/dev/null | xxd -p | head -c 8)
+    if [ "${FIRST_BYTE:0:4}" = "0000" ]; then
+      PBF_READY=true
+      break
+    fi
   fi
-  sleep 1
+  echo "    [${i}/60] En attente du PBF (taille=$CONTENT_LENGTH octets)…"
+  sleep 2
 done
+
+if [ "$PBF_READY" != "true" ]; then
+  echo "✗ Timeout : PBF non disponible après 2 minutes."
+  exit 1
+fi
 
 curl -sS -L "$PBF_URL" -o "$DATA_DIR/carrefour-foch.osm.pbf"
 
-# Vérification : c'est bien un PBF, pas un HTML d'erreur
+# Double vérification (ceinture+bretelles)
 if ! file "$DATA_DIR/carrefour-foch.osm.pbf" | grep -q "OpenStreetMap"; then
-  echo "✗ Le fichier téléchargé n'est pas un PBF valide. Probablement une erreur côté slice."
+  echo "✗ Le fichier téléchargé n'est pas un PBF valide."
   echo "  Contenu reçu :"
   head -c 200 "$DATA_DIR/carrefour-foch.osm.pbf"
   echo ""
