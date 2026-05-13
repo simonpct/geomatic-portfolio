@@ -1,0 +1,44 @@
+{
+  "zebra": {
+    "width": 64,
+    "height": 64,
+    "x": 0,
+    "y": 0,
+    "pixelRatio": 1
+  },
+  "chevron-double": {
+    "width": 64,
+    "height": 64,
+    "x": 64,
+    "y": 0,
+    "pixelRatio": 1
+  },
+  "bicycle": {
+    "width": 64,
+    "height": 64,
+    "x": 128,
+    "y": 0,
+    "pixelRatio": 1
+  },
+  "arrow-through": {
+    "width": 64,
+    "height": 64,
+    "x": 192,
+    "y": 0,
+    "pixelRatio": 1
+  },
+  "arrow-left": {
+    "width": 64,
+    "height": 64,
+    "x": 256,
+    "y": 0,
+    "pixelRatio": 1
+  },
+  "arrow-right": {
+    "width": 64,
+    "height": 64,
+    "x": 320,
+    "y": 0,
+    "pixelRatio": 1
+  }
+}

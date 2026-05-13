@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#dae2fd",
+                    "surface-dim": "#cbdbf5",
+                    "on-surface-variant": "#3d4a42",
+                    "primary-fixed-dim": "#68dba9",
+                    "primary": "#006948",
+                    "outline-variant": "#bccac0",
+                    "tertiary-fixed-dim": "#7bd0ff",
+                    "primary-container": "#00855d",
+                    "surface-bright": "#f8f9ff",
+                    "on-primary-fixed-variant": "#005137",
+                    "tertiary-fixed": "#c4e7ff",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed-dim": "#bec6e0",
+                    "surface": "#f8f9ff",
+                    "surface-container-highest": "#d3e4fe",
+                    "surface-container-low": "#eff4ff",
+                    "surface-container-high": "#dce9ff",
+                    "surface-tint": "#006c4a",
+                    "on-tertiary-container": "#fcfcff",
+                    "surface-container": "#e5eeff",
+                    "background": "#f8f9ff",
+                    "inverse-surface": "#213145",
+                    "outline": "#6d7a72",
+                    "on-background": "#0b1c30",
+                    "tertiary-container": "#007da9",
+                    "primary-fixed": "#85f8c4",
+                    "on-primary-fixed": "#002114",
+                    "on-primary": "#ffffff",
+                    "on-surface": "#0b1c30",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed": "#131b2e",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#006387",
+                    "inverse-on-surface": "#eaf1ff",
+                    "on-secondary-container": "#5c647a",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#004c69",
+                    "inverse-primary": "#68dba9",
+                    "secondary-container": "#dae2fd",
+                    "on-error": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "secondary": "#565e74",
+                    "on-primary-container": "#f5fff7",
+                    "on-secondary-fixed-variant": "#3f465c",
+                    "surface-variant": "#d3e4fe",
+                    "on-tertiary-fixed": "#001e2c",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "grid_opacity": "0.05",
+                    "xs": "4px",
+                    "unit": "4px",
+                    "md": "16px",
+                    "sm": "8px",
+                    "xxl": "80px",
+                    "margin": "32px",
+                    "lg": "24px",
+                    "gutter": "24px",
+                    "xl": "40px"
+            },
+            "fontFamily": {
+                    "h2": ["Space Grotesk"],
+                    "body-md": ["Inter"],
+                    "label-caps": ["Space Grotesk"],
+                    "h1": ["Space Grotesk"],
+                    "mono-data": ["Space Grotesk"],
+                    "body-lg": ["Inter"],
+                    "h3": ["Space Grotesk"]
+            },
+            "fontSize": {
+                    "h2": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "h1": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "mono-data": ["14px", {"lineHeight": "1.4", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "h3": ["24px", {"lineHeight": "1.3", "letterSpacing": "0em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .technical-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, #E2E8F0 1px, transparent 1px),
+                              linear-gradient(to bottom, #E2E8F0 1px, transparent 1px);
+            opacity: 0.1;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm">
+<div class="flex justify-between items-center max-w-[1280px] mx-auto px-6 h-16">
+<div class="flex items-center gap-2">
+<span class="font-h2 text-primary">
+<span class="material-symbols-outlined align-middle mr-1" data-icon="explore">explore</span>
+</span>
+<span class="text-xl font-bold tracking-tighter text-slate-900 dark:text-white font-h3">Simon P.</span>
+</div>
+<nav class="hidden md:flex gap-8">
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-600 transition-colors font-label-caps" href="#">Accueil</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-600 transition-colors font-label-caps" href="#">À Propos</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-600 transition-colors font-label-caps" href="#">Portfolio</a>
+<a class="text-emerald-600 dark:text-emerald-500 font-bold border-b-2 border-emerald-600 pb-1 font-label-caps" href="#">WebGIS</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-600 transition-colors font-label-caps" href="#">Méthodologie</a>
+</nav>
+<button class="bg-primary hover:bg-primary-container text-white px-5 py-2 rounded-lg font-label-caps transition-all transform hover:scale-95 duration-200">
+                Contact
+            </button>
+</div>
+</header>
+<main class="relative pt-16 min-h-screen">
+<!-- Background Technical Grid -->
+<div class="absolute inset-0 pointer-events-none technical-grid"></div>
+<!-- Section Hero / Context -->
+<section class="max-w-[1280px] mx-auto px-6 pt-12 pb-8 flex flex-col md:flex-row justify-between items-end gap-6 relative z-10">
+<div>
+<p class="font-label-caps text-primary tracking-[0.2em] mb-2">GÉOMATIQUE &amp; DÉVELOPPEMENT</p>
+<h1 class="font-h1 text-on-surface">La Métropole du <br/><span class="text-primary-container">Grand Nancy</span></h1>
+</div>
+<div class="text-right flex flex-col items-end">
+<p class="font-mono-data text-outline mb-1">48.6921° N, 6.1844° E</p>
+<div class="h-[1px] w-32 bg-outline-variant mb-1"></div>
+<p class="font-label-caps text-on-surface-variant">SYSTÈME D'INFORMATION GÉOGRAPHIQUE</p>
+</div>
+</section>
+<!-- Main WebGIS Interface Container -->
+<section class="max-w-[1280px] mx-auto px-6 mb-xxl relative z-10">
+<div class="grid grid-cols-12 gap-gutter bg-white border border-outline-variant/30 rounded-xl overflow-hidden shadow-sm h-[700px]">
+<!-- Layer Stack Side Panel -->
+<aside class="col-span-12 lg:col-span-3 border-r border-outline-variant/30 flex flex-col bg-surface-container-lowest">
+<div class="p-6 border-b border-outline-variant/30">
+<h3 class="font-h3 text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="layers">layers</span>
+                            Couches
+                        </h3>
+</div>
+<div class="flex-grow overflow-y-auto p-4 space-y-3">
+<!-- Layer Item -->
+<div class="flex items-center justify-between p-3 rounded bg-surface-container-low border border-transparent hover:border-primary-fixed-dim transition-colors group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline" data-icon="check_box" style="font-variation-settings: 'FILL' 1;">check_box</span>
+<span class="font-label-caps">Administratif</span>
+</div>
+<span class="material-symbols-outlined text-outline opacity-0 group-hover:opacity-100 transition-opacity" data-icon="settings" data-weight="fill">settings</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded border border-outline-variant/20 hover:border-primary-fixed-dim transition-colors group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline" data-icon="check_box" style="font-variation-settings: 'FILL' 1;">check_box</span>
+<span class="font-label-caps">Communal</span>
+</div>
+<span class="material-symbols-outlined text-outline opacity-0 group-hover:opacity-100 transition-opacity" data-icon="settings">settings</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded border border-outline-variant/20 hover:border-primary-fixed-dim transition-colors group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline" data-icon="check_box_outline_blank">check_box_outline_blank</span>
+<span class="font-label-caps">Hydrographie</span>
+</div>
+<span class="material-symbols-outlined text-outline opacity-0 group-hover:opacity-100 transition-opacity" data-icon="settings">settings</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded border border-outline-variant/20 hover:border-primary-fixed-dim transition-colors group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline" data-icon="check_box_outline_blank">check_box_outline_blank</span>
+<span class="font-label-caps">Transports</span>
+</div>
+<span class="material-symbols-outlined text-outline opacity-0 group-hover:opacity-100 transition-opacity" data-icon="settings">settings</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded border border-outline-variant/20 hover:border-primary-fixed-dim transition-colors group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline" data-icon="check_box_outline_blank">check_box_outline_blank</span>
+<span class="font-label-caps">Topographie</span>
+</div>
+<span class="material-symbols-outlined text-outline opacity-0 group-hover:opacity-100 transition-opacity" data-icon="settings">settings</span>
+</div>
+</div>
+<div class="p-6 bg-surface-container-high">
+<button class="w-full flex items-center justify-center gap-2 border border-primary text-primary py-2 font-label-caps rounded hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                            AJOUTER WMS/WFS
+                        </button>
+</div>
+</aside>
+<!-- Central Map View -->
+<main class="col-span-12 lg:col-span-6 relative bg-surface-dim overflow-hidden flex flex-col">
+<div class="absolute top-4 left-4 z-20 flex flex-col gap-2">
+<button class="bg-white p-2 rounded shadow-sm border border-outline-variant/50 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="zoom_in">zoom_in</span>
+</button>
+<button class="bg-white p-2 rounded shadow-sm border border-outline-variant/50 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="zoom_out">zoom_out</span>
+</button>
+<button class="bg-white p-2 rounded shadow-sm border border-outline-variant/50 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="my_location">my_location</span>
+</button>
+</div>
+<!-- Main Map Image -->
+<div class="w-full h-full relative">
+<img class="w-full h-full object-cover grayscale-[20%] contrast-[110%]" data-alt="A sophisticated top-down professional geospatial map visualization of a dense European urban area like Nancy, France. The map uses a clean technical palette of muted grays, emerald greens for parks, and deep blues for water bodies. Technical grid lines and data overlays with precise coordinate markers are visible across the cartography. The lighting is bright and architectural, suggesting a high-end urban planning software interface." data-location="Nancy, France" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdOaCC8kQ0PvEt8v9ZumHWU-XsgnZH04q1SukGFgYrjpH_9GdYPL2pK_v5wSesC6FR435uUlGq3c-4W-QLLWM-J5jNFhvB49BM6fduOKZe2dUzwTPb7yax4ZJdMv6XfkoVeJpTHF2hlxb6MPI01olPxcmFZdujE_xEgzbz4teILPdtMA74tnXB_ws1VsRUBmcT4uqEySPz5KROf3z6CnmV-8S42IE9aIPAhGItUL2RzWfUx-UChlyjJfF8BWEGevIK70Hvc-oz2A"/>
+<!-- Measurement Overlay Mockup -->
+<div class="absolute bottom-10 right-10 bg-white/90 backdrop-blur-md p-4 border border-outline-variant/40 rounded shadow-lg max-w-[200px]">
+<p class="font-label-caps text-[10px] text-outline mb-2">MESURE DE DISTANCE</p>
+<div class="flex justify-between items-end">
+<span class="font-h3 text-primary">12.4</span>
+<span class="font-mono-data text-on-surface-variant">kilomètres</span>
+</div>
+</div>
+</div>
+<!-- Bottom Scale Bar -->
+<div class="absolute bottom-0 w-full bg-white/60 backdrop-blur-sm px-6 py-2 border-t border-outline-variant/30 flex justify-between items-center">
+<div class="flex items-center gap-4">
+<div class="flex flex-col">
+<div class="h-1 w-20 border-x border-b border-on-surface"></div>
+<span class="text-[10px] font-mono-data mt-1">200 m</span>
+</div>
+<span class="font-mono-data text-[10px] text-outline">EPSG:2154 (RGF93 / Lambert-93)</span>
+</div>
+<div class="font-mono-data text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded">MODE ÉDITION ACTIF</div>
+</div>
+</main>
+<!-- Analytics Side Panel -->
+<aside class="col-span-12 lg:col-span-3 border-l border-outline-variant/30 flex flex-col bg-surface-container-lowest">
+<div class="p-6 border-b border-outline-variant/30">
+<h3 class="font-h3 text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="query_stats">query_stats</span>
+                            Analytiques
+                        </h3>
+</div>
+<div class="p-6 space-y-8 flex-grow">
+<!-- Metric Card -->
+<div class="space-y-1">
+<p class="font-label-caps text-outline">AREA METRICS</p>
+<div class="flex items-baseline gap-2">
+<span class="font-h1 text-primary">142.3</span>
+<span class="font-h3 text-on-surface-variant">km²</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[65%]"></div>
+</div>
+</div>
+<div class="space-y-1">
+<p class="font-label-caps text-outline">COMMUNES</p>
+<div class="flex items-baseline gap-2">
+<span class="font-h1 text-on-surface">20</span>
+<span class="font-h3 text-on-surface-variant">unités</span>
+</div>
+</div>
+<!-- Mini Chart Mockup -->
+<div class="space-y-4 pt-4 border-t border-outline-variant/20">
+<p class="font-label-caps text-outline">DENSITÉ DE POPULATION</p>
+<div class="flex items-end gap-1 h-24">
+<div class="bg-primary/20 w-full h-[40%] rounded-t-sm"></div>
+<div class="bg-primary/40 w-full h-[60%] rounded-t-sm"></div>
+<div class="bg-primary/60 w-full h-[85%] rounded-t-sm"></div>
+<div class="bg-primary/80 w-full h-[70%] rounded-t-sm"></div>
+<div class="bg-primary w-full h-[95%] rounded-t-sm"></div>
+<div class="bg-primary/50 w-full h-[55%] rounded-t-sm"></div>
+</div>
+</div>
+</div>
+<div class="p-6 border-t border-outline-variant/30">
+<button class="w-full bg-on-surface text-white py-3 font-label-caps rounded flex items-center justify-center gap-2 hover:bg-primary transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+                            EXPORTER LES DONNÉES
+                        </button>
+</div>
+</aside>
+</div>
+</section>
+<!-- Technical Architecture Section -->
+<section class="max-w-[1280px] mx-auto px-6 mb-xxl relative z-10">
+<div class="mb-12 border-l-4 border-primary pl-6">
+<h2 class="font-h2 text-on-surface">Architecture Technique</h2>
+<p class="font-body-lg text-on-surface-variant mt-2 max-w-2xl">Une infrastructure robuste et scalable basée sur des standards open-source pour une performance géospatiale optimale.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Tech Card 1 -->
+<div class="bg-white border border-outline-variant/30 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow relative group">
+<div class="absolute top-0 right-0 w-12 h-12 flex items-center justify-center">
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="database">database</span>
+</div>
+<h4 class="font-h3 text-primary mb-2">PostGIS</h4>
+<p class="font-body-md text-on-surface-variant mb-4">Stockage spatial relationnel de haute précision avec indexation géométrique avancée.</p>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] px-2 py-1 bg-surface-container font-mono-data rounded">SQL</span>
+<span class="text-[10px] px-2 py-1 bg-surface-container font-mono-data rounded">GEOMETRY</span>
+</div>
+</div>
+<!-- Tech Card 2 -->
+<div class="bg-white border border-outline-variant/30 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow relative group">
+<div class="absolute top-0 right-0 w-12 h-12 flex items-center justify-center">
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="dns">dns</span>
+</div>
+<h4 class="font-h3 text-primary mb-2">GeoServer</h4>
+<p class="font-body-md text-on-surface-variant mb-4">Diffusion de données géospatiales via les protocoles standards WMS, WFS et WMTS.</p>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] px-2 py-1 bg-surface-container font-mono-data rounded">OGC</span>
+<span class="text-[10px] px-2 py-1 bg-surface-container font-mono-data rounded">REST</span>
+</div>
+</div>
+<!-- Tech Card 3 -->
+<div class="bg-white border border-outline-variant/30 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow relative group">
+<div class="absolute top-0 right-0 w-12 h-12 flex items-center justify-center">
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="web">web</span>
+</div>
+<h4 class="font-h3 text-primary mb-2">OpenLayers</h4>
+<p class="font-body-md text-on-surface-variant mb-4">Framework cartographique haute performance pour le rendu de couches vectorielles complexes.</p>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] px-2 py-1 bg-surface-container font-mono-data rounded">JAVASCRIPT</span>
+<span class="text-[10px] px-2 py-1 bg-surface-container font-mono-data rounded">WEBGL</span>
+</div>
+</div>
+<!-- Tech Card 4 -->
+<div class="bg-white border border-outline-variant/30 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow relative group">
+<div class="absolute top-0 right-0 w-12 h-12 flex items-center justify-center">
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="bar_chart">bar_chart</span>
+</div>
+<h4 class="font-h3 text-primary mb-2">D3.js</h4>
+<p class="font-body-md text-on-surface-variant mb-4">Visualisation de données statistiques dynamiques liées aux entités géographiques.</p>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] px-2 py-1 bg-surface-container font-mono-data rounded">SVG</span>
+<span class="text-[10px] px-2 py-1 bg-surface-container font-mono-data rounded">ANALYTICS</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Project Methodology / Steps -->
+<section class="bg-surface-container-low py-xxl">
+<div class="max-w-[1280px] mx-auto px-6">
+<div class="text-center mb-16">
+<h2 class="font-h2 text-on-surface">Méthodologie de Déploiement</h2>
+<div class="h-1 w-24 bg-primary mx-auto mt-4"></div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-start gap-12">
+<div class="flex-1 text-center group">
+<div class="w-16 h-16 rounded-full bg-white border border-primary flex items-center justify-center mx-auto mb-6 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-white" data-icon="map">map</span>
+</div>
+<h5 class="font-h3 text-on-surface mb-2">01. Acquisition</h5>
+<p class="font-body-md text-on-surface-variant">Collecte et nettoyage des données topographiques et administratives.</p>
+</div>
+<div class="hidden md:block pt-8 text-outline-variant">
+<span class="material-symbols-outlined" data-icon="trending_flat">trending_flat</span>
+</div>
+<div class="flex-1 text-center group">
+<div class="w-16 h-16 rounded-full bg-white border border-primary flex items-center justify-center mx-auto mb-6 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-white" data-icon="architecture">architecture</span>
+</div>
+<h5 class="font-h3 text-on-surface mb-2">02. Modélisation</h5>
+<p class="font-body-md text-on-surface-variant">Structuration spatiale PostGIS et optimisation des index.</p>
+</div>
+<div class="hidden md:block pt-8 text-outline-variant">
+<span class="material-symbols-outlined" data-icon="trending_flat">trending_flat</span>
+</div>
+<div class="flex-1 text-center group">
+<div class="w-16 h-16 rounded-full bg-white border border-primary flex items-center justify-center mx-auto mb-6 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-white" data-icon="terminal">terminal</span>
+</div>
+<h5 class="font-h3 text-on-surface mb-2">03. Développement</h5>
+<p class="font-body-md text-on-surface-variant">Implémentation de l'interface client et des services OGC.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-slate-200 dark:border-slate-800 mt-20 bg-white dark:bg-slate-950">
+<div class="flex flex-col md:flex-row justify-between items-center max-w-[1280px] mx-auto py-12 px-6 gap-4">
+<div class="flex items-center gap-4">
+<span class="font-bold text-slate-900 dark:text-white font-h3">Simon P.</span>
+<div class="h-4 w-[1px] bg-outline-variant"></div>
+<span class="font-space-grotesk text-xs uppercase tracking-widest text-slate-500 dark:text-slate-500">
+                    © 2024 Simon P. | 48.6921, 6.1844
+                </span>
+</div>
+<div class="flex gap-8">
+<a class="font-space-grotesk text-xs uppercase tracking-widest text-slate-500 dark:text-slate-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-opacity duration-300" href="#">LinkedIn</a>
+<a class="font-space-grotesk text-xs uppercase tracking-widest text-slate-500 dark:text-slate-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-opacity duration-300" href="#">Email</a>
+<a class="font-space-grotesk text-xs uppercase tracking-widest text-slate-500 dark:text-slate-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-opacity duration-300" href="#">GitHub</a>
+</div>
+</div>
+</footer>
+</body></html>

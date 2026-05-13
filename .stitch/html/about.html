@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .technical-grid {
+            background-image: 
+                linear-gradient(to right, #E2E8F0 1px, transparent 1px),
+                linear-gradient(to bottom, #E2E8F0 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-color: rgba(226, 232, 240, 0.05);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#dae2fd",
+                        "surface-dim": "#cbdbf5",
+                        "on-surface-variant": "#3d4a42",
+                        "primary-fixed-dim": "#68dba9",
+                        "primary": "#006948",
+                        "outline-variant": "#bccac0",
+                        "tertiary-fixed-dim": "#7bd0ff",
+                        "primary-container": "#00855d",
+                        "surface-bright": "#f8f9ff",
+                        "on-primary-fixed-variant": "#005137",
+                        "tertiary-fixed": "#c4e7ff",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "surface": "#f8f9ff",
+                        "surface-container-highest": "#d3e4fe",
+                        "surface-container-low": "#eff4ff",
+                        "surface-container-high": "#dce9ff",
+                        "surface-tint": "#006c4a",
+                        "on-tertiary-container": "#fcfcff",
+                        "surface-container": "#e5eeff",
+                        "background": "#f8f9ff",
+                        "inverse-surface": "#213145",
+                        "outline": "#6d7a72",
+                        "on-background": "#0b1c30",
+                        "tertiary-container": "#007da9",
+                        "primary-fixed": "#85f8c4",
+                        "on-primary-fixed": "#002114",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#0b1c30",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed": "#131b2e",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#006387",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-secondary-container": "#5c647a",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#004c69",
+                        "inverse-primary": "#68dba9",
+                        "secondary-container": "#dae2fd",
+                        "on-error": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#565e74",
+                        "on-primary-container": "#f5fff7",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "surface-variant": "#d3e4fe",
+                        "on-tertiary-fixed": "#001e2c",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "grid_opacity": "0.05",
+                        "xs": "4px",
+                        "unit": "4px",
+                        "md": "16px",
+                        "sm": "8px",
+                        "xxl": "80px",
+                        "margin": "32px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "xl": "40px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Space Grotesk"],
+                        "body-md": ["Inter"],
+                        "label-caps": ["Space Grotesk"],
+                        "h1": ["Space Grotesk"],
+                        "mono-data": ["Space Grotesk"],
+                        "body-lg": ["Inter"],
+                        "h3": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "h2": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "h1": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "mono-data": ["14px", {"lineHeight": "1.4", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "h3": ["24px", {"lineHeight": "1.3", "letterSpacing": "0em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background font-body-md text-on-surface technical-grid min-h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 border-b border-slate-200 bg-white/80 backdrop-blur-md shadow-sm">
+<div class="flex justify-between items-center max-w-[1280px] mx-auto px-6 h-16">
+<div class="text-xl font-bold tracking-tighter text-slate-900 font-h2">Simon P.</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-slate-600 hover:text-emerald-600 transition-colors font-label-caps" href="#">Accueil</a>
+<a class="text-emerald-600 font-bold border-b-2 border-emerald-600 pb-1 font-label-caps" href="#">À Propos</a>
+<a class="text-slate-600 hover:text-emerald-600 transition-colors font-label-caps" href="#">Portfolio</a>
+<a class="text-slate-600 hover:text-emerald-600 transition-colors font-label-caps" href="#">WebGIS</a>
+<a class="text-slate-600 hover:text-emerald-600 transition-colors font-label-caps" href="#">Méthodologie</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-caps hover:opacity-90 transition-all">
+                Contact
+            </button>
+</div>
+</nav>
+<main class="pt-32 pb-xxl px-6 max-w-[1280px] mx-auto">
+<!-- Hero Section -->
+<header class="grid grid-cols-1 md:grid-cols-12 gap-xl mb-xxl relative">
+<!-- Decorative Crosshair -->
+<div class="absolute -top-10 -left-10 w-20 h-20 pointer-events-none opacity-20">
+<div class="absolute top-1/2 w-full h-px bg-slate-400"></div>
+<div class="absolute left-1/2 h-full w-px bg-slate-400"></div>
+</div>
+<div class="md:col-span-7 flex flex-col justify-center">
+<div class="flex items-center gap-sm mb-md">
+<span class="w-8 h-px bg-primary"></span>
+<span class="font-label-caps text-primary uppercase">Candidat M.Sc. Géomatique</span>
+</div>
+<h1 class="font-h1 text-h1 text-on-background mb-lg">Architecte de la Donnée Spatiale</h1>
+<p class="font-body-lg text-body-lg text-secondary mb-xl max-w-xl">
+                    Spécialisé dans l'analyse géospatiale avancée et le WebGIS. Mon parcours académique à l'ETH Zürich et à la TUM m'a permis de forger une expertise technique rigoureuse au service de l'urbanisme durable.
+                </p>
+<div class="flex gap-md">
+<a class="flex items-center gap-2 px-4 py-2 border border-outline rounded-lg text-on-surface hover:border-primary hover:text-primary transition-all font-label-caps" href="https://linkedin.com">
+<span class="material-symbols-outlined text-md">link</span> LinkedIn
+                    </a>
+<a class="flex items-center gap-2 px-4 py-2 border border-outline rounded-lg text-on-surface hover:border-primary hover:text-primary transition-all font-label-caps" href="https://github.com">
+<span class="material-symbols-outlined text-md">code</span> GitHub
+                    </a>
+</div>
+</div>
+<div class="md:col-span-5 relative group">
+<div class="absolute -inset-2 bg-primary/10 rounded-xl group-hover:bg-primary/20 transition-all"></div>
+<img alt="Simon P. Portrait" class="w-full h-[500px] object-cover rounded-xl shadow-lg border-2 border-white relative z-10" data-alt="A professional headshot of a young male professional with a confident, neutral expression, set against a clean, minimalist studio background with soft directional lighting. The color palette is composed of soft grays and sharp white tones, reflecting a corporate and modern engineering aesthetic. The image conveys technical precision and reliability through high-resolution clarity and a centered, authoritative composition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnO-7NirPTh6-ntGRqczLP3Bub7DA28HP4zgBnbF0S4H3ag_9CaYC9EqAwqQmzko--FaGHqLlnqj-QtFU8s0taNf9K35L6jvZWJxPttKJ6mlg6OAmL5NhK4erEDNGsFpKzLD09JgeaDDjSbakHj_7F7SKu1U8hv2mlSt9KMFdXM6kT4KMj8KZNgfhqg9Qww8_B8XuoFwqYJuZ8WLJmueMHjslueyrWh6ilzeBLjmk2IwUhxcCxJW2YJ-XqPlrZ7xX7CPUVh94t0Q"/>
+<div class="absolute bottom-4 right-4 z-20 bg-white/90 backdrop-blur px-3 py-1 rounded-full border border-slate-200">
+<span class="font-mono-data text-xs text-primary">45.5231, -122.6765</span>
+</div>
+</div>
+</header>
+<!-- Bento Grid: Journey & Philosophy -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-lg mb-xxl">
+<!-- Academic Journey Timeline -->
+<div class="md:col-span-2 bg-white p-xl rounded-xl border border-outline-variant shadow-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-5">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">timeline</span>
+</div>
+<h2 class="font-h2 text-h2 mb-xl">Parcours Académique</h2>
+<div class="space-y-xl relative">
+<div class="absolute left-[11px] top-2 bottom-2 w-px bg-slate-200"></div>
+<div class="relative pl-12">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-primary flex items-center justify-center border-4 border-white shadow-sm">
+<div class="w-1.5 h-1.5 bg-white rounded-full"></div>
+</div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-h3 text-h3">M.Sc. Geomatics</h3>
+<span class="bg-primary-container text-on-primary-container px-3 py-1 rounded-full font-label-caps text-[10px]">ETH ZÜRICH</span>
+</div>
+<p class="font-mono-data text-primary mb-2">2022 — Présent</p>
+<p class="text-secondary">Spécialisation en Analyse Spatiale et Télédétection. Focus sur l'automatisation des flux de données géospatiales pour la planification urbaine intelligente.</p>
+</div>
+<div class="relative pl-12">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-slate-200 flex items-center justify-center border-4 border-white shadow-sm">
+<div class="w-1.5 h-1.5 bg-slate-400 rounded-full"></div>
+</div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-h3 text-h3">B.Sc. Environmental Engineering</h3>
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded-full font-label-caps text-[10px]">TUM MÜNCHEN</span>
+</div>
+<p class="font-mono-data text-secondary mb-2">2018 — 2021</p>
+<p class="text-secondary">Fondamentaux en ingénierie civile, hydrologie et systèmes d'information géographique (SIG). Mention Très Bien.</p>
+</div>
+</div>
+</div>
+<!-- Philosophy Card -->
+<div class="bg-primary p-xl rounded-xl shadow-lg flex flex-col justify-between text-on-primary relative overflow-hidden">
+<div class="absolute -bottom-10 -right-10 w-40 h-40 bg-white/5 rounded-full blur-3xl"></div>
+<div>
+<span class="material-symbols-outlined mb-md text-3xl" style="font-variation-settings: 'FILL' 1;">verified</span>
+<h2 class="font-h2 text-h2 mb-lg">La Précision comme Fondement</h2>
+<p class="font-body-md text-body-md opacity-90 leading-relaxed">
+                        Pour moi, la géomatique n'est pas seulement une question de chiffres, c'est l'art de traduire la complexité du monde en données exploitables. Chaque millimètre compte quand il s'agit de bâtir l'avenir.
+                    </p>
+</div>
+<div class="pt-xl">
+<div class="w-full h-px bg-white/20 mb-md"></div>
+<span class="font-label-caps text-xs tracking-tighter opacity-70 italic">— Ma Philosophie de Travail</span>
+</div>
+</div>
+</section>
+<!-- Soft Skills & Technical Visual -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-xl items-center">
+<div class="md:col-span-4 space-y-lg">
+<h2 class="font-h2 text-h2">Compétences Transverses</h2>
+<div class="space-y-md">
+<!-- Communication -->
+<div class="group">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-caps text-on-surface-variant">Communication</span>
+<span class="font-mono-data text-primary text-xs">A+</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="w-[90%] h-full bg-primary group-hover:bg-primary-container transition-all"></div>
+</div>
+</div>
+<!-- Teamwork -->
+<div class="group">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-caps text-on-surface-variant">Travail d'Équipe</span>
+<span class="font-mono-data text-primary text-xs">Collaboratif</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="w-[95%] h-full bg-primary group-hover:bg-primary-container transition-all"></div>
+</div>
+</div>
+<!-- Problem Solving -->
+<div class="group">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-caps text-on-surface-variant">Résolution de Problèmes</span>
+<span class="font-mono-data text-primary text-xs">Analytique</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="w-[85%] h-full bg-primary group-hover:bg-primary-container transition-all"></div>
+</div>
+</div>
+</div>
+<p class="text-secondary text-sm pt-4 italic">
+                    Équilibre constant entre rigueur scientifique et flexibilité relationnelle pour mener à bien des projets multi-disciplinaires.
+                </p>
+</div>
+<div class="md:col-span-8">
+<div class="bg-white border border-outline-variant rounded-xl overflow-hidden shadow-sm flex flex-col">
+<div class="bg-surface-container-low px-6 py-3 border-b border-outline-variant flex items-center justify-between">
+<div class="flex gap-2">
+<div class="w-2 h-2 rounded-full bg-red-400"></div>
+<div class="w-2 h-2 rounded-full bg-amber-400"></div>
+<div class="w-2 h-2 rounded-full bg-emerald-400"></div>
+</div>
+<span class="font-mono-data text-[10px] text-secondary uppercase tracking-widest">Aperçu Technique _ SIG / WebGIS</span>
+</div>
+<div class="relative h-[300px] bg-slate-900 group">
+<img alt="Technical GIS Interface" class="w-full h-full object-cover opacity-60" data-alt="A sophisticated digital dashboard showing complex geospatial data layers and 3D topographic maps. The interface features emerald green glowing wireframes and glowing heatmaps over a dark charcoal background. High-tech UI elements like coordinate grids, scale bars, and data charts are visible in the margins, creating a feel of advanced surveying software and engineering precision." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkes2iSslM8eYU0WPCH7jqs66B-92RwE5YAZpy20n8wGcKCqGSj9-bmXMdNt4RtqoDhng6mKzTEnanDC1u0BcFOR9an3k0bFHjsj3eYHcqsZCr9X2nw5ZaG6s8ssoq0zX7EDVrMTTzrV-i9PQiI4Qvk8UrqRiRrK9V17LLpXfXnSRFBRhom7yLPX8m_w-nuqwViUjEVviRu0HpZEBNUuwi55H7prw6UX1xoPpQQ48R8URTI5hFO-JUFFH2Uy6ik9WxFuZgxXuvFg"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="text-center">
+<span class="material-symbols-outlined text-white/50 text-5xl mb-4">query_stats</span>
+<p class="text-white/80 font-mono-data text-sm">Visualisation en temps réel de la donnée spatiale</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-slate-200 bg-white mt-20">
+<div class="flex flex-col md:flex-row justify-between items-center max-w-[1280px] mx-auto py-12 px-6 gap-4">
+<div class="font-bold text-slate-900 font-h3">Simon P.</div>
+<div class="flex gap-8">
+<a class="text-slate-500 hover:text-emerald-600 transition-all font-label-caps" href="#">LinkedIn</a>
+<a class="text-slate-500 hover:text-emerald-600 transition-all font-label-caps" href="#">Email</a>
+<a class="text-slate-500 hover:text-emerald-600 transition-all font-label-caps" href="#">GitHub</a>
+</div>
+<div class="font-label-caps text-xs uppercase tracking-widest text-slate-500">
+                © 2024 Simon P. | 45.523062, -122.676482
+            </div>
+</div>
+</footer>
+</body></html>
