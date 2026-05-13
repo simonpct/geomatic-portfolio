@@ -51,10 +51,12 @@ for i in {1..60}; do
   CONTENT_LENGTH=$(curl -sSI "$PBF_URL" 2>/dev/null | grep -i "content-length" | tail -1 | awk '{print $2}' | tr -d '\r')
 
   if [ -n "$CONTENT_LENGTH" ] && [ "$CONTENT_LENGTH" -gt 5000 ]; then
-    # Vérification supplémentaire : le premier octet ressemble à du PBF binaire
-    # (les PBF OSM commencent par 0x00 0x00 0x00 0x?? - la taille du blob header)
-    FIRST_BYTE=$(curl -sS --range "0-3" "$PBF_URL" 2>/dev/null | xxd -p | head -c 8)
-    if [ "${FIRST_BYTE:0:4}" = "0000" ]; then
+    # Vérification supplémentaire : les 4 premiers octets ressemblent à du PBF
+    # binaire (PBF OSM commence par 0x00 0x00 0x00 0x?? - taille du blob header).
+    # On utilise od (POSIX) au lieu de xxd qui n'est pas dispo partout.
+    FIRST_BYTES=$(curl -sS --range "0-3" "$PBF_URL" 2>/dev/null \
+                  | od -An -tx1 -N4 | tr -d ' \n')
+    if [ "${FIRST_BYTES:0:4}" = "0000" ]; then
       PBF_READY=true
       break
     fi
