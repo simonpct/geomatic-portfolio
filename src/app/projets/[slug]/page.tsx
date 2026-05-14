@@ -19,6 +19,8 @@ import {
 } from "@/lib/projects";
 import { Pipeline } from "@/components/pipeline";
 import { MicroMappingMap } from "@/components/micromapping-map-lazy";
+import { AccessibiliteStanMap } from "@/components/accessibilite-stan-map-lazy";
+import stanStats from "../../../../public/data/stan/stats.json";
 
 function getStackIcon(label: string): LucideIcon {
   const l = label.toLowerCase();
@@ -169,6 +171,23 @@ function HeroVisual({ slug, title }: { slug: string; title: string }) {
     );
   }
 
+  if (slug === "accessibilite-stan") {
+    return (
+      <div className="mx-auto max-w-container px-6">
+        <StanStatsBanner />
+        <div className="mt-6">
+          <AccessibiliteStanMap />
+        </div>
+        <p className="mt-3 text-sm text-text-subtle">
+          Basculez entre les seuils 5 / 10 / 15 min pour voir l&apos;emprise de
+          la couverture. Cliquez sur un arrêt pour son nom. La couleur des
+          carreaux INSEE indique le niveau de couverture du carreau de
+          population (200 m).
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="mx-auto max-w-container px-6">
       <div className="relative aspect-video overflow-hidden rounded-lg border border-border bg-surface-elevated">
@@ -278,9 +297,7 @@ function Sections({
                     src={coverImage.src}
                     alt={coverImage.alt}
                   />
-                ) : (
-                  <SectionVisualPlaceholder />
-                )}
+                ) : null}
               </div>
             </div>
           </section>
@@ -300,17 +317,6 @@ function SectionImage({ src, alt }: { src: string; alt: string }) {
         sizes="(min-width: 1024px) 800px, 100vw"
         className="object-cover"
       />
-    </div>
-  );
-}
-
-function SectionVisualPlaceholder() {
-  return (
-    <div className="relative mt-8 aspect-video overflow-hidden rounded border border-border bg-surface-muted">
-      <div className="tech-grid absolute inset-0" />
-      <div className="absolute inset-0 flex items-center justify-center">
-        <p className="label-caps text-text-subtle">Visuel à intégrer</p>
-      </div>
     </div>
   );
 }
@@ -379,6 +385,40 @@ function LiveDemos({
   // Pour le micromapping, la démo interactive est déjà dans le hero principal —
   // pas besoin d'un deuxième bloc Livrables.
   if (slug === "micromapping-osm") return null;
+
+  // Pour accessibilite-stan, la carte est dans le hero — on remplace le bloc
+  // Livrables par un simple lien GitHub.
+  if (slug === "accessibilite-stan") {
+    return (
+      <section className="border-t border-border bg-surface-elevated">
+        <div className="mx-auto max-w-container px-6 py-16 md:py-20">
+          <p className="label-caps text-accent">Code source</p>
+          <h2 className="mt-4 font-display text-2xl font-semibold tracking-tight md:text-3xl">
+            Pipeline reproductible
+          </h2>
+          <p className="mt-4 max-w-3xl text-lg leading-relaxed text-text-muted">
+            Le repo public contient les trois scripts qui régénèrent
+            l&apos;analyse depuis zéro : download des sources, calcul des
+            isochrones r5py, agrégation INSEE et publication des GeoJSON
+            servis par cette page. Reproductible en quelques minutes via
+            <code className="mx-1 rounded bg-surface-muted px-1.5 py-0.5 text-sm">
+              uv sync
+            </code>
+            .
+          </p>
+          <a
+            href="https://github.com/simonpct/accessibilite-stan"
+            target="_blank"
+            rel="noreferrer"
+            className="mt-8 inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 font-medium text-white transition-opacity hover:opacity-90"
+          >
+            Code source sur GitHub →
+          </a>
+        </div>
+      </section>
+    );
+  }
+
   if (!project.liveDemo || project.liveDemo.length === 0) return null;
   return (
     <section className="border-t border-border bg-surface-elevated">
@@ -509,5 +549,51 @@ function Pagination({
         )}
       </div>
     </nav>
+  );
+}
+
+function StanStatsBanner() {
+  const stats = stanStats as {
+    global: {
+      population_totale: number;
+      seuils: Record<
+        string,
+        { population_couverte: number; pourcentage: number }
+      >;
+    };
+  };
+  const items = [
+    { t: 5, label: "à ≤ 5 min" },
+    { t: 10, label: "à ≤ 10 min" },
+    { t: 15, label: "à ≤ 15 min" },
+  ] as const;
+  const pop = stats.global.population_totale;
+  return (
+    <div className="rounded-lg border border-border bg-surface-elevated p-6">
+      <p className="label-caps text-text-subtle">Résultats</p>
+      <div className="mt-4 grid grid-cols-1 gap-6 md:grid-cols-3">
+        {items.map(({ t, label }) => {
+          const s = stats.global.seuils[String(t)];
+          return (
+            <div key={t}>
+              <p className="font-display text-4xl font-bold tracking-tight text-text md:text-5xl">
+                {s.pourcentage.toFixed(1)}{" "}
+                <span className="text-2xl text-text-muted">%</span>
+              </p>
+              <p className="mt-2 text-sm text-text-muted">
+                de la population {label}
+              </p>
+              <p className="mt-1 text-xs text-text-subtle">
+                {Math.round(s.population_couverte).toLocaleString("fr-FR")} hab.
+              </p>
+            </div>
+          );
+        })}
+      </div>
+      <p className="mt-6 text-xs text-text-subtle">
+        Sur {Math.round(pop).toLocaleString("fr-FR")} habitants recensés au
+        carroyage INSEE Filosofi 2017 dans les 20 communes du Grand Nancy.
+      </p>
+    </div>
   );
 }

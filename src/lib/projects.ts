@@ -133,41 +133,75 @@ export const projects: Project[] = [
     year: "2026",
     category: "Mobilité · Analyse spatiale",
     summary:
-      "Analyse d'isochrones piétonnes sur le réseau STAN : quelle part de la population a un arrêt à moins de 5, 10 ou 15 minutes à pied ?",
-    tags: ["GTFS", "GeoPandas", "MapLibre"],
-    status: "À venir",
+      "Isochrones piétonnes calculées sur le réseau STAN à partir de données 100 % ouvertes : 93 % de la population du Grand Nancy a un arrêt à moins de 5 minutes à pied.",
+    tags: ["GTFS", "r5py", "MapLibre"],
+    status: "Livré",
     meta: {
       role: "Conception · Analyse · Visualisation",
-      statusLabel: "À venir",
+      statusLabel: "Pipeline reproductible · Carte interactive",
     },
     context:
-      "L'accessibilité aux transports en commun est un indicateur clé pour évaluer l'équité d'un service public urbain. Cette analyse mesure, à partir de données 100 % ouvertes, la couverture piétonne du réseau STAN à l'échelle du Grand Nancy.",
+      "L'accessibilité aux transports en commun est un indicateur clé pour évaluer l'équité d'un service public urbain. Cette analyse mesure, à partir de données 100 % ouvertes, la couverture piétonne du réseau STAN (bus + tram) à l'échelle du Grand Nancy — 20 communes, 223 000 habitants au carroyage INSEE.",
     sections: [
       {
         number: "02",
         title: "Sources de données",
-        body: "GTFS officiel STAN pour les arrêts et fréquences, OpenStreetMap pour la voirie piétonne, carroyage INSEE pour la distribution de population. L'ensemble des sources sont publiques et reproductibles.",
+        body: "GTFS officiel STAN (transport.data.gouv.fr) pour les 1 463 arrêts du réseau, voirie OpenStreetMap récupérée via Overpass et convertie en PBF par osmium-tool, carroyage INSEE Filosofi 200 m pour la distribution de population, limites communales Overpass (admin_level=8) filtrées par code EPCI. Tout est versionné dans metadata.json (hash SHA-256 et date d'extraction) pour reproduire l'analyse à l'identique.",
       },
       {
         number: "03",
         title: "Méthode d'analyse",
-        body: "Calcul d'isochrones réseau (et non buffers euclidiens) via un moteur de routage piéton sur le graphe OSM. Agrégation par carreau INSEE 200 m pour estimer la part de population couverte par tranche de temps.",
+        body: "Calcul d'isochrones réseau via r5py (wrapper Python du moteur Conveyal R5). Une grille fine de destinations (100 m) couvre l'union des communes. r5py construit la matrice temps-de-marche depuis les 1 463 arrêts vers chaque cellule, à 4,5 km/h, en mode WALK uniquement. Pour chaque seuil (5/10/15 min), les cellules atteintes sont fusionnées avec un buffer adapté au pas de grille pour produire un polygone d'union. Chaque carreau INSEE 200 m hérite ensuite du seuil le plus restrictif qui couvre son centroïde.",
       },
       {
         number: "04",
-        title: "Visualisation",
-        body: "Carte web interactive avec basculement entre seuils de temps (5, 10, 15 min), mise en évidence des zones blanches, fiche d'arrêt au clic. Limites assumées : analyse en heure de pointe, mode piéton seul, accessibilité PMR non modélisée.",
+        title: "Résultats",
+        body: "Sur 223 390 habitants : 93,3 % à ≤ 5 min, 99,2 % à ≤ 10 min, 99,6 % à ≤ 15 min. Nancy centre dépasse 96 % dès 5 min ; les communes les moins denses (Art-sur-Meurthe, Dommartemont) descendent à 54-77 % à 5 min mais atteignent 100 % à 15 min. Le maillage STAN est remarquablement serré.",
       },
     ],
     stack: [
-      { label: "Données", items: ["GTFS STAN", "OSM", "INSEE"] },
-      { label: "Traitement", items: ["Python", "GeoPandas", "r5py / pgRouting"] },
-      { label: "Publication", items: ["MapLibre GL JS", "Tuiles vectorielles", "Next.js"] },
+      { label: "Données", items: ["GTFS STAN", "OpenStreetMap (Overpass)", "INSEE Filosofi 2017"] },
+      { label: "Traitement", items: ["Python · uv", "r5py + Conveyal R5", "GeoPandas · DuckDB", "osmium-tool"] },
+      { label: "Publication", items: ["MapLibre GL JS", "GeoJSON statique", "Next.js"] },
+    ],
+    pipeline: [
+      {
+        number: "01",
+        label: "Sources",
+        title: "Données ouvertes",
+        description:
+          "GTFS STAN, voirie OSM via Overpass, carroyage INSEE Filosofi 200 m, communes via admin_level=8. Hashes SHA-256 sauvegardés pour la reproductibilité.",
+        color: "#4f7060",
+      },
+      {
+        number: "02",
+        label: "Routage",
+        title: "Isochrones r5py",
+        description:
+          "Conveyal R5 calcule la matrice temps-de-marche depuis 1 463 arrêts vers une grille fine de 17 242 destinations. 25 millions de paires en ~30 s.",
+        color: "#6b7d8a",
+      },
+      {
+        number: "03",
+        label: "Agrégation",
+        title: "Carreaux INSEE",
+        description:
+          "Chaque carreau 200 m hérite du seuil minimal qui couvre son centroïde. Agrégation de la population par seuil et par commune.",
+        color: "#a78b5e",
+      },
+      {
+        number: "04",
+        label: "Web",
+        title: "Carte interactive",
+        description:
+          "GeoJSON statiques servis par Next.js, rendus MapLibre avec basculement de seuil et popup arrêt. Fond Maptiler base-v4.",
+        color: "#8a6a78",
+      },
     ],
     liveDemo: [
       {
-        label: "Carte interactive",
-        description: "Basculement entre seuils 5 / 10 / 15 minutes.",
+        label: "Code source GitHub",
+        description: "Pipeline Python complet, reproductible avec uv sync + 3 scripts.",
       },
     ],
   },
@@ -229,6 +263,10 @@ export const projectImages: Record<string, { src: string; alt: string }> = {
   "le-palais": {
     src: "/lepalais.png",
     alt: "Le Palais — vue extérieure du bâtiment, Nancy",
+  },
+  "accessibilite-stan": {
+    src: "/access-stan.png",
+    alt: "Carte d'accessibilité piétonne au réseau STAN — isochrones 5 minutes sur le Grand Nancy",
   },
   "micromapping-osm": {
     src: "/micromapping.jpg",

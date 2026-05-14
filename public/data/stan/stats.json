@@ -1,0 +1,241 @@
+{
+  "global": {
+    "population_totale": 223389.5,
+    "seuils": {
+      "5": {
+        "population_couverte": 208442.0,
+        "pourcentage": 93.31
+      },
+      "10": {
+        "population_couverte": 221485.0,
+        "pourcentage": 99.15
+      },
+      "15": {
+        "population_couverte": 222548.0,
+        "pourcentage": 99.62
+      }
+    }
+  },
+  "communes": [
+    {
+      "code_insee": "54025",
+      "name": "Art-sur-Meurthe",
+      "population_totale": 1487.0,
+      "pop_le_5min": 1151.0,
+      "pct_le_5min": 77.4,
+      "pop_le_10min": 1484.0,
+      "pct_le_10min": 99.8,
+      "pop_le_15min": 1484.0,
+      "pct_le_15min": 99.8
+    },
+    {
+      "code_insee": "54165",
+      "name": "Dommartemont",
+      "population_totale": 844.0,
+      "pop_le_5min": 457.0,
+      "pct_le_5min": 54.15,
+      "pop_le_10min": 839.0,
+      "pct_le_10min": 99.41,
+      "pop_le_15min": 844.0,
+      "pct_le_15min": 100.0
+    },
+    {
+      "code_insee": "54184",
+      "name": "Essey-lès-Nancy",
+      "population_totale": 8507.5,
+      "pop_le_5min": 6933.5,
+      "pct_le_5min": 81.5,
+      "pop_le_10min": 8499.5,
+      "pct_le_10min": 99.91,
+      "pop_le_15min": 8499.5,
+      "pct_le_15min": 99.91
+    },
+    {
+      "code_insee": "54197",
+      "name": "Fléville-devant-Nancy",
+      "population_totale": 2329.5,
+      "pop_le_5min": 2235.5,
+      "pct_le_5min": 95.96,
+      "pop_le_10min": 2328.5,
+      "pct_le_10min": 99.96,
+      "pop_le_15min": 2329.5,
+      "pct_le_15min": 100.0
+    },
+    {
+      "code_insee": "54257",
+      "name": "Heillecourt",
+      "population_totale": 5717.0,
+      "pop_le_5min": 5283.5,
+      "pct_le_5min": 92.42,
+      "pop_le_10min": 5717.0,
+      "pct_le_10min": 100.0,
+      "pop_le_15min": 5717.0,
+      "pct_le_15min": 100.0
+    },
+    {
+      "code_insee": "54265",
+      "name": "Houdemont",
+      "population_totale": 2256.0,
+      "pop_le_5min": 2097.0,
+      "pct_le_5min": 92.95,
+      "pop_le_10min": 2256.0,
+      "pct_le_10min": 100.0,
+      "pop_le_15min": 2256.0,
+      "pct_le_15min": 100.0
+    },
+    {
+      "code_insee": "54274",
+      "name": "Jarville-la-Malgrange",
+      "population_totale": 8595.0,
+      "pop_le_5min": 7856.0,
+      "pct_le_5min": 91.4,
+      "pop_le_10min": 8595.0,
+      "pct_le_10min": 100.0,
+      "pop_le_15min": 8595.0,
+      "pct_le_15min": 100.0
+    },
+    {
+      "code_insee": "54300",
+      "name": "Laneuveville-devant-Nancy",
+      "population_totale": 6544.5,
+      "pop_le_5min": 5482.0,
+      "pct_le_5min": 83.76,
+      "pop_le_10min": 6232.0,
+      "pct_le_10min": 95.22,
+      "pop_le_15min": 6236.0,
+      "pct_le_15min": 95.29
+    },
+    {
+      "code_insee": "54304",
+      "name": "Laxou",
+      "population_totale": 12688.5,
+      "pop_le_5min": 12031.0,
+      "pct_le_5min": 94.82,
+      "pop_le_10min": 12669.5,
+      "pct_le_10min": 99.85,
+      "pop_le_15min": 12669.5,
+      "pct_le_15min": 99.85
+    },
+    {
+      "code_insee": "54328",
+      "name": "Ludres",
+      "population_totale": 5894.5,
+      "pop_le_5min": 5403.5,
+      "pct_le_5min": 91.67,
+      "pop_le_10min": 5856.5,
+      "pct_le_10min": 99.36,
+      "pop_le_15min": 5891.5,
+      "pct_le_15min": 99.95
+    },
+    {
+      "code_insee": "54339",
+      "name": "Malzéville",
+      "population_totale": 7580.0,
+      "pop_le_5min": 7064.5,
+      "pct_le_5min": 93.2,
+      "pop_le_10min": 7531.5,
+      "pct_le_10min": 99.36,
+      "pop_le_15min": 7580.0,
+      "pct_le_15min": 100.0
+    },
+    {
+      "code_insee": "54357",
+      "name": "Maxéville",
+      "population_totale": 8315.5,
+      "pop_le_5min": 7943.5,
+      "pct_le_5min": 95.53,
+      "pop_le_10min": 8249.0,
+      "pct_le_10min": 99.2,
+      "pop_le_15min": 8266.0,
+      "pct_le_15min": 99.4
+    },
+    {
+      "code_insee": "54395",
+      "name": "Nancy",
+      "population_totale": 80809.0,
+      "pop_le_5min": 78324.0,
+      "pct_le_5min": 96.92,
+      "pop_le_10min": 80610.0,
+      "pct_le_10min": 99.75,
+      "pop_le_15min": 80809.0,
+      "pct_le_15min": 100.0
+    },
+    {
+      "code_insee": "54439",
+      "name": "Pulnoy",
+      "population_totale": 4870.0,
+      "pop_le_5min": 4582.0,
+      "pct_le_5min": 94.09,
+      "pop_le_10min": 4864.0,
+      "pct_le_10min": 99.88,
+      "pop_le_15min": 4864.0,
+      "pct_le_15min": 99.88
+    },
+    {
+      "code_insee": "54482",
+      "name": "Saint-Max",
+      "population_totale": 9220.0,
+      "pop_le_5min": 8463.0,
+      "pct_le_5min": 91.79,
+      "pop_le_10min": 9220.0,
+      "pct_le_10min": 100.0,
+      "pop_le_15min": 9220.0,
+      "pct_le_15min": 100.0
+    },
+    {
+      "code_insee": "54495",
+      "name": "Saulxures-lès-Nancy",
+      "population_totale": 3825.5,
+      "pop_le_5min": 3315.5,
+      "pct_le_5min": 86.67,
+      "pop_le_10min": 3800.5,
+      "pct_le_10min": 99.35,
+      "pop_le_15min": 3822.5,
+      "pct_le_15min": 99.92
+    },
+    {
+      "code_insee": "54498",
+      "name": "Seichamps",
+      "population_totale": 5097.5,
+      "pop_le_5min": 4891.5,
+      "pct_le_5min": 95.96,
+      "pop_le_10min": 5090.5,
+      "pct_le_10min": 99.86,
+      "pop_le_15min": 5097.5,
+      "pct_le_15min": 100.0
+    },
+    {
+      "code_insee": "54526",
+      "name": "Tomblaine",
+      "population_totale": 9176.0,
+      "pop_le_5min": 8921.5,
+      "pct_le_5min": 97.23,
+      "pop_le_10min": 9176.0,
+      "pct_le_10min": 100.0,
+      "pop_le_15min": 9176.0,
+      "pct_le_15min": 100.0
+    },
+    {
+      "code_insee": "54547",
+      "name": "Vandœuvre-lès-Nancy",
+      "population_totale": 25527.5,
+      "pop_le_5min": 23096.5,
+      "pct_le_5min": 90.48,
+      "pop_le_10min": 24714.0,
+      "pct_le_10min": 96.81,
+      "pop_le_15min": 25396.5,
+      "pct_le_15min": 99.49
+    },
+    {
+      "code_insee": "54578",
+      "name": "Villers-lès-Nancy",
+      "population_totale": 13637.0,
+      "pop_le_5min": 12848.5,
+      "pct_le_5min": 94.22,
+      "pop_le_10min": 13602.0,
+      "pct_le_10min": 99.74,
+      "pop_le_15min": 13637.0,
+      "pct_le_15min": 100.0
+    }
+  ]
+}
