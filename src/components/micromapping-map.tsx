@@ -250,9 +250,56 @@ const buildRenderStyle = (origin: string, debug = false): StyleSpecification => 
       ],
       paint: {
         "line-color": MARKING_YELLOW,
-        "line-width": ["interpolate", ["linear"], ["zoom"], 16, 0.5, 18, 2],
+        // width OSM en mètres (ex. width=0.5 → 50 cm au sol). Fallback 15 cm.
+        // Conversion m → px à lat 48.69° : 1 m ≈ 256·2^z / 26449511 px.
+        // L'expression zoom doit être au top-level ; on injecte width dans
+        // chaque stop plutôt qu'avec un `*` autour de l'interpolate.
+        "line-width": [
+          "interpolate",
+          ["exponential", 2],
+          ["zoom"],
+          16, ["*", ["to-number", ["coalesce", ["get", "width"], 0.15]], 0.634],
+          18, ["*", ["to-number", ["coalesce", ["get", "width"], 0.15]], 2.538],
+          20, ["*", ["to-number", ["coalesce", ["get", "width"], 0.15]], 10.15],
+        ],
       },
     },
+    // Stop line : largeur typique 50 cm, motif 50 cm trait / 30 cm vide
+    // (dasharray exprimé en multiples de line-width ; ici line-width ≈ 0.5 m,
+    // donc [1, 0.6] = 0.5 m trait, 0.3 m vide). Filtre étendu : on traite
+    // toute LineString blanche avec stroke=dashed comme stop_line par défaut.
+    {
+      id: "road-marking-line-white-stop",
+      source: "carrefour",
+      "source-layer": "road_marking",
+      type: "line",
+      filter: [
+        "all",
+        ["==", ["geometry-type"], "LineString"],
+        ["!=", ["get", "colour"], "yellow"],
+        ["!=", ["get", "road_marking"], "arrow"],
+        ["==", ["get", "road_marking"], "stop_line"],
+      ],
+      paint: {
+        "line-color": MARKING_WHITE,
+        "line-width": [
+          "interpolate",
+          ["exponential", 2],
+          ["zoom"],
+          16, ["*", ["to-number", ["coalesce", ["get", "width"], 0.5]], 0.634],
+          18, ["*", ["to-number", ["coalesce", ["get", "width"], 0.5]], 2.538],
+          20, ["*", ["to-number", ["coalesce", ["get", "width"], 0.5]], 10.15],
+        ],
+        "line-dasharray": [
+          "case",
+          ["==", ["get", "stroke"], "dashed"],
+          ["literal", [2.5, 2]],
+          ["literal", [1, 0]],
+        ],
+      },
+    },
+    // Lane divider (et autres lignes blanches LineString) : largeur typique
+    // 15 cm, motif 3 m trait / 1.2 m vide → [20, 8] en multiples de 0.15 m.
     {
       id: "road-marking-line-white",
       source: "carrefour",
@@ -263,14 +310,22 @@ const buildRenderStyle = (origin: string, debug = false): StyleSpecification => 
         ["==", ["geometry-type"], "LineString"],
         ["!=", ["get", "colour"], "yellow"],
         ["!=", ["get", "road_marking"], "arrow"],
+        ["!=", ["get", "road_marking"], "stop_line"],
       ],
       paint: {
         "line-color": MARKING_WHITE,
-        "line-width": ["interpolate", ["linear"], ["zoom"], 16, 0.5, 18, 2],
+        "line-width": [
+          "interpolate",
+          ["exponential", 2],
+          ["zoom"],
+          16, ["*", ["to-number", ["coalesce", ["get", "width"], 0.15]], 0.634],
+          18, ["*", ["to-number", ["coalesce", ["get", "width"], 0.15]], 2.538],
+          20, ["*", ["to-number", ["coalesce", ["get", "width"], 0.15]], 10.15],
+        ],
         "line-dasharray": [
           "case",
           ["==", ["get", "stroke"], "dashed"],
-          ["literal", [2, 2]],
+          ["literal", [25, 8]],
           ["literal", [1, 0]],
         ],
       },

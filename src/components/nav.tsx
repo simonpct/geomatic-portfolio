@@ -17,18 +17,29 @@ export function Nav() {
         >
           Simon Picot
         </Link>
-        <ul className="hidden items-center gap-8 md:flex">
-          {links.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className="text-sm text-text-muted transition-colors hover:text-accent"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div className="hidden items-center gap-8 md:flex">
+          <ul className="flex items-center gap-8">
+            {links.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="text-sm text-text-muted transition-colors hover:text-accent"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <a
+            href="/cv.pdf"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-md border border-border-strong px-3 py-1.5 text-sm font-medium text-text transition-colors hover:border-accent hover:text-accent"
+          >
+            CV
+            <span aria-hidden>↗</span>
+          </a>
+        </div>
       </nav>
     </header>
   );

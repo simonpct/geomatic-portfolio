@@ -2,9 +2,34 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getProject, getProjectImage, projects } from "@/lib/projects";
+import {
+  Database,
+  Cpu,
+  Globe,
+  Wrench,
+  Layers,
+  type LucideIcon,
+} from "lucide-react";
+import {
+  getProject,
+  getProjectAccent,
+  getProjectImage,
+  getStatusVisual,
+  projects,
+} from "@/lib/projects";
 import { Pipeline } from "@/components/pipeline";
 import { MicroMappingMap } from "@/components/micromapping-map-lazy";
+
+function getStackIcon(label: string): LucideIcon {
+  const l = label.toLowerCase();
+  if (l.includes("don")) return Database;
+  if (l.includes("acquis") || l.includes("hardware") || l.includes("terrain"))
+    return Wrench;
+  if (l.includes("trait") || l.includes("pipeline") || l.includes("bureau"))
+    return Cpu;
+  if (l.includes("publi") || l.includes("web")) return Globe;
+  return Layers;
+}
 
 type Params = { slug: string };
 
@@ -39,16 +64,18 @@ export default async function ProjectPage({
   const prev = idx > 0 ? projects[idx - 1] : null;
   const next = idx < projects.length - 1 ? projects[idx + 1] : null;
 
+  const accent = getProjectAccent(slug);
+
   return (
     <article>
       <BackLink />
-      <Header project={project} />
+      <Header project={project} accent={accent} />
       <HeroVisual slug={slug} title={project.title} />
       <Context project={project} index={idx} />
       <PipelineSection project={project} />
       <Sections project={project} />
       <LiveDemos project={project} slug={slug} />
-      <Stack project={project} />
+      <Stack project={project} accent={accent} />
       <Pagination prev={prev} next={next} />
     </article>
   );
@@ -67,14 +94,45 @@ function BackLink() {
   );
 }
 
-function Header({ project }: { project: ReturnType<typeof getProject> & {} }) {
+function Header({
+  project,
+  accent,
+}: {
+  project: ReturnType<typeof getProject> & {};
+  accent: string;
+}) {
+  const status = getStatusVisual(project.status);
   return (
     <header className="mx-auto max-w-container px-6 pt-8 pb-12">
-      <p className="label-caps text-accent">{project.category}</p>
+      <div className="flex flex-wrap items-center gap-3">
+        <p className="label-caps" style={{ color: accent }}>
+          {project.category}
+        </p>
+        <span
+          className="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5"
+          style={{
+            color: status.text,
+            backgroundColor: status.bg,
+            borderColor: status.border,
+          }}
+        >
+          <span
+            className="h-1.5 w-1.5 rounded-full"
+            style={{ backgroundColor: status.dot }}
+            aria-hidden
+          />
+          <span className="label-caps">{status.label}</span>
+        </span>
+      </div>
       <h1 className="mt-4 font-display text-5xl font-bold leading-[1.05] tracking-tight md:text-6xl">
         {project.title}
       </h1>
-      <p className="mt-2 text-text-subtle">
+      <span
+        className="mt-4 block h-0.75 w-16 rounded-full"
+        style={{ backgroundColor: accent }}
+        aria-hidden
+      />
+      <p className="mt-4 text-text-subtle">
         {project.location} · {project.year}
       </p>
       <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-muted">
@@ -272,32 +330,58 @@ function LiveDemos({
 
 function Stack({
   project,
+  accent,
 }: {
   project: ReturnType<typeof getProject> & {};
+  accent: string;
 }) {
   return (
     <section className="border-t border-border">
       <div className="mx-auto max-w-container px-6 py-16 md:py-20">
-        <p className="label-caps text-accent">Stack</p>
+        <p className="label-caps" style={{ color: accent }}>
+          Stack
+        </p>
         <h2 className="mt-4 font-display text-2xl font-semibold tracking-tight md:text-3xl">
           Outils mobilisés
         </h2>
-        <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-3">
-          {project.stack.map((group) => (
-            <div key={group.label}>
-              <p className="label-caps text-text-subtle">{group.label}</p>
-              <ul className="mt-4 flex flex-col gap-2">
-                {group.items.map((item) => (
-                  <li
-                    key={item}
-                    className="font-display text-sm text-text"
+        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+          {project.stack.map((group) => {
+            const Icon = getStackIcon(group.label);
+            return (
+              <div
+                key={group.label}
+                className="flex flex-col rounded-lg border border-border bg-surface-elevated p-6 transition-colors hover:border-border-strong"
+              >
+                <div className="flex items-center gap-3">
+                  <span
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-md"
+                    style={{
+                      backgroundColor: `${accent}1a`,
+                      color: accent,
+                    }}
                   >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+                    <Icon className="h-4.5 w-4.5" strokeWidth={1.75} />
+                  </span>
+                  <p className="label-caps text-text-subtle">{group.label}</p>
+                </div>
+                <ul className="mt-5 flex flex-col gap-2">
+                  {group.items.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-center gap-2 font-display text-sm text-text"
+                    >
+                      <span
+                        className="h-1 w-1 rounded-full"
+                        style={{ backgroundColor: accent }}
+                        aria-hidden
+                      />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

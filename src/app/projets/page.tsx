@@ -1,6 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getProjectImage, projects } from "@/lib/projects";
+import {
+  getProjectAccent,
+  getProjectImage,
+  getStatusVisual,
+  projects,
+} from "@/lib/projects";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -28,12 +33,19 @@ export default function ProjectsPage() {
       <div className="mt-16 flex flex-col gap-6">
         {projects.map((p, i) => {
           const image = getProjectImage(p.slug);
+          const accent = getProjectAccent(p.slug);
+          const status = getStatusVisual(p.status);
           return (
           <Link
             key={p.slug}
             href={`/projets/${p.slug}`}
-            className="group grid grid-cols-1 gap-6 rounded-lg border border-border bg-surface-elevated p-6 transition-all hover:border-border-strong hover:shadow-sm md:grid-cols-12 md:p-8"
+            className="group relative grid grid-cols-1 gap-6 overflow-hidden rounded-lg border border-border bg-surface-elevated p-6 transition-all hover:border-border-strong hover:shadow-sm md:grid-cols-12 md:p-8"
           >
+            <span
+              className="absolute left-0 top-0 h-full w-1 origin-top scale-y-0 transition-transform duration-300 group-hover:scale-y-100"
+              style={{ backgroundColor: accent }}
+              aria-hidden
+            />
             <div className="md:col-span-4">
               <div className="relative aspect-4/3 overflow-hidden rounded border border-border bg-surface-muted">
                 {image ? (
@@ -48,8 +60,20 @@ export default function ProjectsPage() {
                   <div className="tech-grid absolute inset-0" />
                 )}
                 <div className="absolute left-3 top-3">
-                  <span className="label-caps rounded-sm bg-surface-elevated/90 px-2 py-1 text-text-subtle backdrop-blur">
-                    {p.status}
+                  <span
+                    className="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 backdrop-blur"
+                    style={{
+                      color: status.text,
+                      backgroundColor: `${status.bg}e6`,
+                      borderColor: status.border,
+                    }}
+                  >
+                    <span
+                      className="h-1.5 w-1.5 rounded-full"
+                      style={{ backgroundColor: status.dot }}
+                      aria-hidden
+                    />
+                    <span className="label-caps">{status.label}</span>
                   </span>
                 </div>
               </div>
@@ -61,7 +85,7 @@ export default function ProjectsPage() {
                   <span className="label-caps text-text-subtle">
                     0{i + 1}
                   </span>
-                  <span className="label-caps text-accent">
+                  <span className="label-caps" style={{ color: accent }}>
                     {p.category}
                   </span>
                 </div>
@@ -86,7 +110,10 @@ export default function ProjectsPage() {
                     </span>
                   ))}
                 </div>
-                <span className="text-sm text-accent transition-transform group-hover:translate-x-1">
+                <span
+                  className="text-sm transition-transform group-hover:translate-x-1"
+                  style={{ color: accent }}
+                >
                   Voir le projet →
                 </span>
               </div>

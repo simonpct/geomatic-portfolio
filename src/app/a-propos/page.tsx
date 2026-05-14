@@ -14,8 +14,77 @@ export default function AboutPage() {
     <article>
       <Header />
       <Sections />
+      <CVBlock />
       <Looking />
     </article>
+  );
+}
+
+function CVBlock() {
+  return (
+    <section className="border-b border-border bg-surface-elevated">
+      <div className="mx-auto grid max-w-container grid-cols-1 gap-12 px-6 py-16 md:grid-cols-12 md:items-center md:py-20">
+        <div className="md:col-span-3">
+          <p className="label-caps text-text-subtle">03 · CV</p>
+        </div>
+        <div className="md:col-span-5">
+          <h2 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
+            Mon CV en un coup d&apos;œil.
+          </h2>
+          <p className="mt-4 max-w-xl text-text-muted">
+            Parcours, alternances, projets et stack technique sur une page,
+            mise à jour pour la candidature L3 SIG. Disponible en PDF.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a
+              href="/cv.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-medium text-accent-fg transition-colors hover:bg-accent-hover"
+            >
+              Télécharger le CV
+              <span aria-hidden>↗</span>
+            </a>
+            <a
+              href="/cv.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-md border border-border-strong px-5 py-3 text-sm font-medium text-text transition-colors hover:border-accent hover:text-accent"
+            >
+              Ouvrir l&apos;aperçu
+            </a>
+          </div>
+        </div>
+        <div className="md:col-span-4">
+          <a
+            href="/cv.pdf"
+            target="_blank"
+            rel="noreferrer"
+            className="group block"
+            aria-label="Ouvrir le CV en PDF"
+          >
+            <div className="relative aspect-[1/1.414] overflow-hidden rounded-md border border-border bg-surface shadow-sm transition-all group-hover:border-border-strong group-hover:shadow-md">
+              <Image
+                src="/cv-preview.jpg"
+                alt="Aperçu du CV de Simon Picot — page 1"
+                fill
+                sizes="(min-width: 768px) 33vw, 100vw"
+                className="object-cover object-top"
+              />
+              <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-surface-elevated/95 px-3 py-2 backdrop-blur">
+                <span className="label-caps text-text-subtle">CV.pdf</span>
+                <span
+                  className="label-caps text-accent transition-transform group-hover:translate-x-0.5"
+                  aria-hidden
+                >
+                  Ouvrir ↗
+                </span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -102,6 +171,21 @@ type TimelineItem = {
 
 const formation: TimelineItem[] = [
   {
+    period: "sept. 2026 — juil. 2027",
+    title:
+      "Université de Lorraine · Licence Pro SIG — Cartographie, Topographie & SIG",
+    meta: "En alternance · sous réserve d'admission",
+    body: "Formation visée pour la rentrée 2026.",
+    badge: "À venir",
+    logos: [
+      {
+        src: "/logos/ul.png",
+        alt: "Université de Lorraine",
+        fallback: "UL",
+      },
+    ],
+  },
+  {
     period: "2024 — août 2026",
     title: "CESI · Bachelor Développement Web",
     meta: "En alternance",
@@ -120,9 +204,9 @@ const formation: TimelineItem[] = [
 const experience: TimelineItem[] = [
   {
     period: "sept. 2025 — auj.",
-    title: "Skedl + Neodigit · Nancy",
-    meta: "Développeur web — alternance double-mission",
-    body: "Gestion d'événements · méthodes agiles.",
+    title: "Skedl / Neodigit · Nancy",
+    meta: "Développeur web — alternance",
+    body: "Développement d'une plateforme de billetterie événementielle.",
     logos: [{ src: "/logos/skedl.png", alt: "Skedl", fallback: "SK" }],
   },
   {

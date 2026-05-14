@@ -230,8 +230,59 @@ export const projectImages: Record<string, { src: string; alt: string }> = {
     src: "/lepalais.png",
     alt: "Le Palais — vue extérieure du bâtiment, Nancy",
   },
+  "micromapping-osm": {
+    src: "/micromapping.jpg",
+    alt: "Carrefour Foch / Saint-Léon / Kennedy — relevé micromapping OSM, Nancy",
+  },
 };
 
 export function getProjectImage(slug: string) {
   return projectImages[slug];
+}
+
+const projectAccents: Record<string, string> = {
+  "le-palais": "#a78b5e",
+  "accessibilite-stan": "#4f7060",
+  "micromapping-osm": "#8a6a78",
+};
+
+export function getProjectAccent(slug: string): string {
+  return projectAccents[slug] ?? "#1f4d3a";
+}
+
+export type ProjectStatusVisual = {
+  dot: string;
+  label: string;
+  text: string;
+  bg: string;
+  border: string;
+};
+
+export function getStatusVisual(status: Project["status"]): ProjectStatusVisual {
+  switch (status) {
+    case "Livré":
+      return {
+        dot: "#1f4d3a",
+        label: status,
+        text: "#1f4d3a",
+        bg: "#e6efe9",
+        border: "#1f4d3a33",
+      };
+    case "En cours":
+      return {
+        dot: "#a78b5e",
+        label: status,
+        text: "#7a6443",
+        bg: "#f5efe3",
+        border: "#a78b5e33",
+      };
+    case "À venir":
+      return {
+        dot: "#78716c",
+        label: status,
+        text: "#57534e",
+        bg: "#f4f4f3",
+        border: "#78716c33",
+      };
+  }
 }

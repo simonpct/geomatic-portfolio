@@ -1,4 +1,5 @@
 const socials = [
+  { href: "/cv.pdf", label: "CV PDF" },
   { href: "https://linkedin.com/in/simon-picot", label: "LinkedIn" },
   { href: "mailto:pro@simonpct.fr", label: "Email" },
   { href: "https://github.com/simonpct", label: "GitHub" },

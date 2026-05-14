@@ -41,7 +41,7 @@ function Hero() {
             web : acquisition LiDAR, analyse spatiale, applications
             cartographiques.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link
               href="/projets"
               className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-medium text-accent-fg transition-colors hover:bg-accent-hover"
@@ -49,9 +49,18 @@ function Hero() {
               Voir mes projets
               <span aria-hidden>→</span>
             </Link>
+            <a
+              href="/cv.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-md border border-border-strong px-5 py-3 text-sm font-medium text-text transition-colors hover:border-accent hover:text-accent"
+            >
+              Télécharger mon CV
+              <span aria-hidden>↗</span>
+            </a>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-md border border-border-strong px-5 py-3 text-sm font-medium text-text transition-colors hover:border-accent hover:text-accent"
+              className="inline-flex items-center gap-2 rounded-md px-5 py-3 text-sm font-medium text-text-muted transition-colors hover:text-accent"
             >
               M&apos;écrire
             </Link>
