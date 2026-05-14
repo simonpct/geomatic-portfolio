@@ -17,7 +17,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 const siteUrl = "https://simonpct.fr";
-const siteTitle = "Simon Picot — Géomatique + dev web";
+const siteTitle = "Simon Picot — Géomatique + développeur web";
 const siteDescription =
   "Étudiant en géomatique à Nancy. Acquisition LiDAR, analyse spatiale et applications cartographiques web.";
 
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 300,
-        alt: "Simon Picot — Géomatique + dev web",
+        alt: "Simon Picot — Géomatique + développeur web",
       },
     ],
   },

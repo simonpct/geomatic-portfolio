@@ -132,7 +132,7 @@ function Sections() {
     <>
       <Parcours />
 
-      <Section number="02" label="Démarche" title="Géomatique + dev web">
+      <Section number="02" label="Démarche" title="Géomatique + développeur web">
         <p>
           Mon angle, c&apos;est de couvrir la chaîne complète :{" "}
           <span className="text-text">acquisition</span> sur le terrain,{" "}
