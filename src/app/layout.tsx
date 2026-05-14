@@ -16,10 +16,37 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
+const siteUrl = "https://simonpct.fr";
+const siteTitle = "Simon Picot — Géomatique + dev web";
+const siteDescription =
+  "Étudiant en géomatique à Nancy. Acquisition LiDAR, analyse spatiale et applications cartographiques web.";
+
 export const metadata: Metadata = {
-  title: "Simon Picot — Géomatique + dev web",
-  description:
-    "Étudiant en géomatique à Nancy. Acquisition LiDAR, analyse spatiale et applications cartographiques web.",
+  metadataBase: new URL(siteUrl),
+  title: siteTitle,
+  description: siteDescription,
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    url: siteUrl,
+    siteName: "Simon Picot",
+    title: siteTitle,
+    description: siteDescription,
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 300,
+        alt: "Simon Picot — Géomatique + dev web",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({
