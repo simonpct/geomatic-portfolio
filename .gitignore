@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# tiles pipeline (build artifacts; only public/tiles/*.pmtiles is shipped)
+/tiles/.venv/
+/tiles/data/
+/tiles/output/

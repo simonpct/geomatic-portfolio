@@ -7,13 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "cv": "typst compile --font-path cv/fonts cv/cv.typ public/cv.pdf",
-    "cv:watch": "typst watch --font-path cv/fonts cv/cv.typ public/cv.pdf",
     "tiles:download": "tiles/scripts/01-download.sh",
     "tiles:build": "tiles/scripts/02-build-tiles.sh && cp tiles/output/carrefour-foch.pmtiles public/tiles/",
     "tiles:sprites": "tiles/scripts/build-sprites.sh",
-    "tiles:all": "npm run tiles:download && npm run tiles:build && npm run tiles:sprites",
-    "linkedin": "\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless=new --no-sandbox --hide-scrollbars --force-device-scale-factor=2 --window-size=1584,500 --screenshot=/tmp/banner_raw.png \"file://$PWD/linkedin/banner.html\" && magick /tmp/banner_raw.png -crop 3168x792+0+0 +repage -quality 95 linkedin/banner.png && echo \"✓ Banner regenerated: linkedin/banner.png\""
+    "tiles:all": "npm run tiles:download && npm run tiles:build && npm run tiles:sprites"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

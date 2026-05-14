@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio — Simon Picot
 
-## Getting Started
+Portfolio personnel d'un étudiant en géomatique à Nancy, candidat en alternance L3 SIG. Le site présente trois projets qui couvrent la chaîne complète **acquisition terrain → analyse spatiale → publication web** : relevé LiDAR patrimonial, analyse d'accessibilité des transports, et micromapping OpenStreetMap rendu en tuiles vectorielles.
 
-First, run the development server:
+## Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Next.js 16** (App Router) · **React 19** · **TypeScript**
+- **Tailwind CSS 4**
+- **MapLibre GL JS** + **PMTiles** pour les cartes vectorielles servies en statique
+- **React Three Fiber** / **three.js** pour les visuels 3D
+- **Framer Motion** pour les transitions
+- Pipeline de tuiles maison : `osmium-tool` + `tippecanoe`, scripts Python (`geopandas`, `shapely`) pour la génération de sprites
+
+## Structure du repo
+
+```
+src/             Application Next.js (App Router)
+public/          Assets statiques — CV, tuiles PMTiles, sprites, modèle 3D
+tiles/           Pipeline de génération des tuiles vectorielles (scripts shell + Python)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Les sources Typst du CV et les assets LinkedIn vivent dans des dossiers séparés à côté de ce repo, hors du portfolio web.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Lancer en local
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm install
+npm run dev
+```
 
-## Learn More
+Le site est ouvert sur [http://localhost:3000](http://localhost:3000).
 
-To learn more about Next.js, take a look at the following resources:
+### Régénérer les tuiles (optionnel)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Le fichier PMTiles est versionné dans `public/tiles/`. Pour le reconstruire à partir d'OpenStreetMap :
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run tiles:all    # download .pbf + build .pmtiles + sprites
+```
 
-## Deploy on Vercel
+Nécessite `osmium-tool`, `tippecanoe` et `uv` installés localement.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Sur l'usage de l'IA générative
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Ce portfolio a été construit avec l'aide d'outils d'IA générative (Claude Code principalement), de façon assumée. Je m'en sers pour accélérer le scaffolding, explorer des pistes de design, et corriger du TypeScript — mais l'architecture, les choix techniques, les pipelines de données et la rédaction des contenus restent les miens. 
+
+## Contact
+
+pro@simonpct.fr

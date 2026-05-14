@@ -74,6 +74,7 @@ export default async function ProjectPage({
       <Context project={project} index={idx} />
       <PipelineSection project={project} />
       <Sections project={project} />
+      <IndoorMap slug={slug} />
       <LiveDemos project={project} slug={slug} />
       <Stack project={project} accent={accent} />
       <Pagination prev={prev} next={next} />
@@ -246,31 +247,59 @@ function Sections({
 }: {
   project: ReturnType<typeof getProject> & {};
 }) {
+  const coverImage = getProjectImage(project.slug);
   return (
     <div className="border-t border-border">
-      {project.sections.map((s) => (
-        <section
-          key={s.number}
-          className="border-b border-border last:border-b-0"
-        >
-          <div className="mx-auto grid max-w-container grid-cols-1 gap-10 px-6 py-16 md:grid-cols-12 md:py-20">
-            <div className="md:col-span-3">
-              <p className="label-caps text-text-subtle">
-                {s.number} · {s.title}
-              </p>
+      {project.sections.map((s) => {
+        const showCover =
+          project.slug === "micromapping-osm" &&
+          s.title === "Sources et collecte" &&
+          coverImage;
+        return (
+          <section
+            key={s.number}
+            className="border-b border-border last:border-b-0"
+          >
+            <div className="mx-auto grid max-w-container grid-cols-1 gap-10 px-6 py-16 md:grid-cols-12 md:py-20">
+              <div className="md:col-span-3">
+                <p className="label-caps text-text-subtle">
+                  {s.number} · {s.title}
+                </p>
+              </div>
+              <div className="md:col-span-9">
+                <h2 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
+                  {s.title}
+                </h2>
+                <p className="mt-4 max-w-3xl text-lg leading-relaxed text-text-muted">
+                  {s.body}
+                </p>
+                {showCover ? (
+                  <SectionImage
+                    src={coverImage.src}
+                    alt={coverImage.alt}
+                  />
+                ) : (
+                  <SectionVisualPlaceholder />
+                )}
+              </div>
             </div>
-            <div className="md:col-span-9">
-              <h2 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
-                {s.title}
-              </h2>
-              <p className="mt-4 max-w-3xl text-lg leading-relaxed text-text-muted">
-                {s.body}
-              </p>
-              <SectionVisualPlaceholder />
-            </div>
-          </div>
-        </section>
-      ))}
+          </section>
+        );
+      })}
+    </div>
+  );
+}
+
+function SectionImage({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="relative mt-8 aspect-video overflow-hidden rounded border border-border bg-surface-muted">
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes="(min-width: 1024px) 800px, 100vw"
+        className="object-cover"
+      />
     </div>
   );
 }
@@ -283,6 +312,60 @@ function SectionVisualPlaceholder() {
         <p className="label-caps text-text-subtle">Visuel à intégrer</p>
       </div>
     </div>
+  );
+}
+
+function IndoorMap({ slug }: { slug: string }) {
+  if (slug !== "micromapping-osm") return null;
+  return (
+    <section className="border-t border-border bg-surface-elevated">
+      <div className="mx-auto max-w-container px-6 py-16 md:py-20">
+        <p className="label-caps text-accent">Indoor</p>
+        <h2 className="mt-4 max-w-2xl font-display text-2xl font-semibold tracking-tight md:text-3xl">
+          Cartographie multi-niveaux — Centre commercial Saint-Sébastien
+        </h2>
+        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-text-muted">
+          Au-delà du carrefour, j&apos;ai étendu la démarche micromapping
+          à l&apos;intérieur d&apos;un bâtiment : relevé des
+          niveaux, boutiques, circulations verticales et équipements du
+          centre commercial Saint-Sébastien à Nancy. Le rendu ci-dessous
+          utilise le style indoor d&apos;
+          <a
+            href="https://indoorequal.org/"
+            target="_blank"
+            rel="noreferrer"
+            className="text-accent underline-offset-2 hover:underline"
+          >
+            indoorequal
+          </a>
+          {" "}sur les contributions OSM. Utilisez le sélecteur de niveau à
+          droite de la carte pour basculer entre les étages.
+        </p>
+        <div className="mt-10 overflow-hidden rounded-lg border border-border bg-surface">
+          <div className="relative aspect-4/3 md:aspect-video">
+            <iframe
+              src="https://indoorequal.org/#map=17.54/48.68821/6.180976"
+              title="Cartographie indoor du centre commercial Saint-Sébastien, Nancy — indoorequal.org"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="absolute inset-0 h-full w-full"
+            />
+          </div>
+        </div>
+        <p className="mt-3 text-sm text-text-subtle">
+          Source des données :{" "}
+          <a
+            href="https://osmcha.org/changesets/174469017?filters=%7B%22uids%22%3A%5B%7B%22label%22%3A%2212876655%22%2C%22value%22%3A%2212876655%22%7D%5D%2C%22date__gte%22%3A%5B%7B%22label%22%3A%22%22%2C%22value%22%3A%22%22%7D%5D%7D"
+            target="_blank"
+            rel="noreferrer"
+            className="text-accent underline-offset-2 hover:underline"
+          >
+            contributions OpenStreetMap personnelles
+          </a>
+          {" "}· Rendu : indoorequal.org
+        </p>
+      </div>
+    </section>
   );
 }
 
